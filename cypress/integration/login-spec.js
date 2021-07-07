@@ -1,4 +1,11 @@
-﻿describe("login test", () => {
+﻿/// <reference types="Cypress"/>
+
+describe("login test", () => {
+
+  beforeEach(() => {
+    cy.task('cleanDatabase')
+    cy.registerUserIfNeeded()})
+  
   it("does not work with wrong credentials", () => {
     
     cy.visit("http://localhost:4100");
@@ -16,7 +23,7 @@
     cy.visit("http://localhost:4100");
     cy.get("[data-cy=sign-in]").click();
     cy.get("[data-cy=username]").type("admin@gmail.com");
-    cy.get("[data-cy=password]").type("admin");
+    cy.get("[data-cy=password]").type("admintest");
     cy.get("[data-cy=login-form]").submit();
 
     cy.get('[data-cy=your-feed]')
